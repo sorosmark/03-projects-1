@@ -16,7 +16,6 @@ try {
 <template>
   <div class="container">
     <UsersTable/>
-
   </div>
 
 </template>

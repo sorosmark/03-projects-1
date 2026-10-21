@@ -13,6 +13,6 @@ export async function deleteUser(id) {
 }
 
 export async function updateUser(id, updatedUser) {
-    const response = await apiClient.put(`${urlFragment}/${id}`, updatedUser);
+    const response = await apiClient.put(`${urlFragment}/${id}`, updatedUser)
     return response.data;
 }
