@@ -15,6 +15,7 @@ try {
 
 <template>
   <div class="container">
+    <CreateUserForm/>
     <UsersTable/>
   </div>
 
