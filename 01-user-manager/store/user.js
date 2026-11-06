@@ -26,11 +26,17 @@ export function useUserStore() {
     users.value = [...users.value, response]
   }
 
+  async function searchUsers(query) {
+    const response = await getUsers(query)
+    users.value = response
+  }
+
   return {
     users,
     fetchUsers,
     modifyUser,
     removeUser,
     addUser,
+    searchUsers,
   }
 }
