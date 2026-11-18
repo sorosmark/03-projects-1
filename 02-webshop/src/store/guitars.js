@@ -7,7 +7,7 @@ const guitars = ref([])
 export function useGuitarStore() {
     async function fetchGuitars() {
         try {
-            const response = await fetch('http://localhost:3001/guitar')
+            const response = await fetch('http://localhost:3001/guitars')
             if (!response.ok) {
                 throw new Error('Failed to fetch guitars')
             }
