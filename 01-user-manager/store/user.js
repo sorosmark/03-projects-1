@@ -2,38 +2,42 @@ import { deleteUser, getUsers,updateUser, createUser } from "../apis/userAPI.js"
 import { ref } from "vue";
 const users = ref([]);
 
-export  function useUserStore() {
-    async function fetchUsers() {
-        users.value = await getUsers();
-    }
+export function useUserStore() {
+  async function fetchUsers() {
+    users.value = await getUsers()
+  }
 
-    // delete
-    async function removeUser(id) {
-        await deleteUser(id)
-        users.value = users.value.filter(user => user.id != id)  
-    }
+  // delete user
+  async function removeUser(id) {
+    await deleteUser(id)
+    users.value = users.value.filter((user) => user.id != id)
+  }
 
-    // update
-    async function modifyUser(updatedUser) {
-        const {id, ...userData} = updatedUser
-        const response = await updateUser(id, userData)
-        users.value = users.value.map(user => user.id === id ? response : user)
-        
-    }
+  // update
+  async function modifyUser(updatedUser) {
+    const { id, ...userData } = updatedUser
+    const response = await updateUser(id, userData)
+    users.value = users.value.map(user => user.id === id ? response : user)
+  }
 
-    // create - post
+  // create - post
+  async function addUser(user) {
+    const response = await createUser(user)
+    users.value = [...users.value, response]
+  }
 
-    async function addUser(user) {
-        const response = await createUser(user)
-        users.value = [response, ...users.value]
-    }
+  async function searchUsers(query) {
+    const response = await getUsers(query)
+    users.value = response
+  }
 
-
-    return {
-        users,
-        fetchUsers,
-        removeUser,
-        modifyUser,
-        addUser
-    };
+  return {
+    users,
+    fetchUsers,
+    modifyUser,
+    removeUser,
+    addUser,
+    searchUsers,
+  }
 }
+

@@ -30,10 +30,6 @@ async function handleSaveClick() {
   }
 }
 
-function handleCancelClick() {
-  isFormVisible.value = false
-}
-
 </script>
 
 <template>
@@ -67,5 +63,4 @@ ref="createUserForm"
               <button class="btn btn-secondary" @click="handleCancelClick">Cancel</button>
             </div>
           </form>
-
 </template>

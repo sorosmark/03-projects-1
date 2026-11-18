@@ -1,32 +1,33 @@
 <script setup>
 import { defineProps, ref, watch } from 'vue';
-import { useUserStore } from '../../store/user.js'
+import { useUserStore } from '../../store/user.js';
 
-const props = defineProps( {
+
+const props = defineProps({
   user: {
     type: Object,
     required: true
   }
-})
+});
 
-const closeButton = ref()
+const closeButton = ref();
 
-const userFormData = ref( props.user)
-const { modifyUser } = useUserStore()
+const userFormData = ref({ ...props.user });
+const { modifyUser } = useUserStore();
 
-
-watch (
+watch(
   () => props.user,
-  (newUser) => { userFormData.value = { ...newUser}}
-)
-
+  (newUser) => {
+    userFormData.value = { ...newUser };
+  }
+);
 
 async function handleSaveButtonClick() {
   try {
-    await modifyUser(userFormData.value)
-    closeButton.value.click()
+    await modifyUser(userFormData.value);
+    closeButton.value.click();
   } catch (error) {
-    alert(error.message)
+    alert(error.message);
   }
 }
 
@@ -54,30 +55,25 @@ async function handleSaveButtonClick() {
         </div>
         <div class="modal-body">
           <form action="">
-            <div class="mb-3">
-              <label for="firstName">First Name</label>
-              <input class="form-control" type="text" name="firstName" id="firstName" required
-              v-model="userFormData.firstName" />
+            <div class="mb3">
+              <label for="firstname">First name</label>
+              <input class="form-control" type="text" name="firstname" id="firstname" required v-model="userFormData.firstName">
             </div>
 
-            <div class="mb-3">
-              <label for="lastName">Last Name</label>
-              <input class="form-control" type="text" name="lastName" id="lastName" required 
-               v-model="userFormData.lastName"/>
+            <div class="mb3">
+              <label for="lastname">Last name</label>
+              <input class="form-control" type="text" name="lastname" id="lastname" required v-model="userFormData.lastName">
             </div>
 
-            <div class="mb-3">
+            <div class="mb3">
               <label for="emailAdress">E-mail</label>
-              <input class="form-control" type="text" name="emailAdress" id="emailAdress" required 
-               v-model="userFormData.emailAdress"/>
+              <input class="form-control" type="emailAdress" name="emailAdress" id="emailAdress" required v-model="userFormData.email">
             </div>
           </form>
-
         </div>
         <div class="modal-footer">
           <button ref="closeButton" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary"
-          @click="handleSaveButtonClick">Save changes</button>
+          <button type="button" class="btn btn-primary" @click="handleSaveButtonClick">Save changes</button>
         </div>
       </div>
     </div>
