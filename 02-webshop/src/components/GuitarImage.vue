@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-    <img :src="`guitars/${title}.jpg`" :alt="title" class="guitar-image"/>
+    <img :src="`guitars/${title}.jpg`" :alt="`${title}`" class="guitar-image"/>
 </template>
 
 <style scoped>
